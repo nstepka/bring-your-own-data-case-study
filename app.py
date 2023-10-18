@@ -1,4 +1,5 @@
-
+#downgrading to proof of concept.  If you need help, message me, and I can help you implement your ideas.
+#I will update the final project on Tuesday morning before the deadline.
 import streamlit as st
 import pandas as pd
 import numpy as np

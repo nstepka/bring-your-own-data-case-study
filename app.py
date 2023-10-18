@@ -411,22 +411,7 @@ def display_data_preview():
     st.write("Data Preview:")
     st.write(st.session_state.data.head(10))
 
-    target_col = st.selectbox("Select the target column", st.session_state.data.columns)
-
-    if st.button("Train and Evaluate Models"):
-        X_train, X_test, y_train, y_test = prepare_data(st.session_state.data, target_col)
-        models = create_models()
-        models = fit_models(X_train, y_train, models)
-        results_df = evaluate_models(X_test, y_test, models)
-           
-        # Display model results in Streamlit
-        st.write("Model Evaluation Results:")
-        st.write(results_df)
-
-        # Plot model performance
-        st.write("Model Performance Comparison:")
-        st.pyplot(plot_model_performance(results_df))
-
+   
 # This function will be added to the sub_page options in your main() function.
 
 def display_results_page():

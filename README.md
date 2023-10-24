@@ -67,6 +67,7 @@ This project is an interactive web application built using Streamlit, designed f
 ### Time Serires ARIMA Analysis
 
 - **Time Series Analysis with ARIMA**: Conduct time series analysis, including ACF and PACF plots, ARIMA model fitting, model diagnostics, forecasting, and model evaluation.
+- Least tested model.
 - **Works well with the ParkData_5years.csv file.**
 ### Causality Analysis
 

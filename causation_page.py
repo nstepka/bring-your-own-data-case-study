@@ -196,45 +196,7 @@ def generate_download_link(filename, download_text):
 
 
 
-def display_estimation():
-    """Sub-task for estimating the causal effect."""
-    
-    st.subheader("Estimation")
 
-    # Ensure that the causal model is created
-    if "causal_model" not in st.session_state:
-        st.warning("Please create a causal model first.")
-        return
-    
-    # Treatment variable
-    treatment = st.session_state.causal_model._treatment[0]
-    
-    # Check if the treatment is binary
-    unique_values = st.session_state.data[treatment].unique()
-    is_binary = len(unique_values) == 2
-
-    # Available estimation methods
-    methods = ["backdoor.linear_regression"]
-    if is_binary:
-        methods.append("backdoor.propensity_score_stratification")
-    chosen_method = st.selectbox("Choose an Estimation Method", methods)
-
-    # Estimate the causal effect
-    if st.button("Estimate"):
-        # Ensure that the identified_estimand is available
-        if "identified_estimand" not in st.session_state:
-            st.warning("Please identify the estimand first.")
-            return
-
-        # Estimation
-        estimate = st.session_state.causal_model.estimate_effect(
-            identified_estimand=st.session_state.identified_estimand,
-            method_name=chosen_method,
-            control_value=0,  # For demonstration
-            treatment_value=1,  # For demonstration
-            target_units="ate"  # For demonstration
-        )
-        st.write("Estimated Causal Effect:", estimate.value)
     
 
 
@@ -303,16 +265,12 @@ def causality_page():
         return
     
     # Moved task selection to sidebar
-    task = st.sidebar.radio("Choose a Causality Sub-task", ["Define Relationships", "Create Causal Model", "Estimation", "Run Refutation Tests"])
+    task = st.sidebar.radio("Choose a Causality Sub-task", ["Define Relationships", "Create Causal Model", "Run Refutation Tests"])
 
     if task == "Define Relationships":
         display_relationships_definition()
     elif task == "Create Causal Model":
         display_causal_model_creation()
-    elif task == "Estimation":
-        display_estimation()
     elif task == "Run Refutation Tests":
         display_refutation_tests()
-
-
 

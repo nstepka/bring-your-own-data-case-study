@@ -64,4 +64,4 @@ This project is an interactive web application built using Streamlit, designed f
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/interactive-data-analysis-tool.git
+   [git clone [https://github.com/your-username/interactive-data-analysis-tool.git](https://github.com/nstepka/bring-your-own-data-case-study/edit/main/README.md](https://github.com/nstepka/bring-your-own-data-case-study/tree/main)https://github.com/nstepka/bring-your-own-data-case-study/tree/main)

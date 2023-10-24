@@ -9,6 +9,8 @@ This project is an interactive web application built using Streamlit, designed f
 ### Data Uploading and Preprocessing
 
 - **CSV File Upload**: Easily upload your CSV datasets.
+### Preprocessing - Feature Enginerring
+
 - **Data Preview**: Get a quick overview of the uploaded data.
 - **Handling Missing Values**: Deal with missing data using various techniques.
 - **Currency and Percentage Changes**: Convert currency and percentage columns into numeric formats.
@@ -58,10 +60,3 @@ This project is an interactive web application built using Streamlit, designed f
 - **Create Causal Model**: Create a causal model based on defined relationships and estimate causal effects.
 - **Estimation**: Estimate causal effects and assess their significance.
 - **Run Refutation Tests**: Perform refutation tests to test the reliability of causal estimates.
-
-## Usage
-
-1. Clone the repository to your local machine:
-
-   ```bash
-   [git clone [https://github.com/your-username/interactive-data-analysis-tool.git](https://github.com/nstepka/bring-your-own-data-case-study/edit/main/README.md](https://github.com/nstepka/bring-your-own-data-case-study/tree/main)https://github.com/nstepka/bring-your-own-data-case-study/tree/main)

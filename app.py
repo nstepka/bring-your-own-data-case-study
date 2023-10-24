@@ -85,20 +85,20 @@ def main_updated():
     # Sidebar for primary task selection
     primary_task = st.sidebar.radio(
     "Choose a primary task:",
-    ["Data Upload", "Insightful Feature Engineering", "Study and Explore the Data", 
-     "Numerical Regression", "Extensive Data Analysis","Time Series Analysis","Causality", "Yield and Save"]
+    ["Data Upload", "Feature Engineering", "Explore the Data", 
+     "Regression Analysis", "Extensive Data Analysis","Time Series Analysis","Causality Analysis", "Yield and Save"]
     )
 
     if primary_task == "Data Upload":
         upload_data()
 
-    elif primary_task == "Insightful Feature Engineering":
+    elif primary_task == "Feature Engineering":
         feature_engineering()
 
-    elif primary_task == "Study and Explore the Data":
+    elif primary_task == "Explore the Data":
         explore_data()
 
-    elif primary_task == "Numerical Regression":
+    elif primary_task == "Regression Analysis":
         evaluate_model_page()
 
     elif primary_task == "Extensive Data Analysis":
@@ -108,7 +108,7 @@ def main_updated():
 
     elif primary_task == "Yield and Save":
         save_data()
-    elif primary_task == "Causality":
+    elif primary_task == "Causality Analysis":
         causality_page()
 
 

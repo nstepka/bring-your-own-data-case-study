@@ -64,6 +64,10 @@ This project is an interactive web application built using Streamlit, designed f
 
 - **This was designed to bring in the hello world of data, the iris data set.  For out-of-the-box use, use iris.csv**
 
+### Time Serires ARIMA Analysis
+
+- **Time Series Analysis with ARIMA**: Conduct time series analysis, including ACF and PACF plots, ARIMA model fitting, model diagnostics, forecasting, and model evaluation.
+- 
 ### Causality Analysis
 
 - **Define Relationships**: Define causal relationships between variables using a graphical interface or upload a DOT file.

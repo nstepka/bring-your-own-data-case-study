@@ -53,7 +53,7 @@ This project is an interactive web application built using Streamlit, designed f
 - **Heat Map**: Display a heatmap to visualize correlations.
 - **Prediction vs. Actual**: Compare predictions against actual labels.
 
-- **Use churn.csv.  You will have to do some feature engineering for best results.**
+- **Use churn.csv.  You will have to do some feature engineering for best results.  Target churn as the feature of interest**
 
 ### Extensive Data Analysis
 

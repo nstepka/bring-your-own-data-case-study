@@ -23,7 +23,7 @@ This project is an interactive web application built using Streamlit, designed f
 - **Aggregate Columns**: Perform aggregations and generate new columns.
 - **Create Binary Flags**: Generate binary flags based on specified conditions.
 
-- If you want to test all features, use listings.csv.
+- **If you want to test all features, use listings.csv.**
 
 ### Data Exploration
 
@@ -32,7 +32,7 @@ This project is an interactive web application built using Streamlit, designed f
 - **Feature Comparison Graphs**: Compare two variables with scatter and line plots.
 - **Feature Importance**: Assess feature importance for regression and classification tasks.
 
-- If you want to explore before using the regression model use df_selected1.csv
+- **If you want to explore before using the regression model use df_selected1.csv**
 
 ### Regression Analysis
 
@@ -43,7 +43,7 @@ This project is an interactive web application built using Streamlit, designed f
 - **Prediction vs. Actual**: Compare predictions against actual values.
 - **Residual Plot**: Examine residuals to assess model performance.
 
-- df_selcted1.csv works out of the box if you target price.
+- **df_selcted1.csv works out of the box if you target price.**
 
 ### Classification Analysis
 
@@ -53,7 +53,7 @@ This project is an interactive web application built using Streamlit, designed f
 - **Heat Map**: Display a heatmap to visualize correlations.
 - **Prediction vs. Actual**: Compare predictions against actual labels.
 
-- Use churn.csv.  You will have to do some feature engineering for best results.
+- **Use churn.csv.  You will have to do some feature engineering for best results.**
 
 ### Extensive Data Analysis
 
@@ -62,7 +62,7 @@ This project is an interactive web application built using Streamlit, designed f
 - **Dimensionality Reduction**: Reduce dimensionality using PCA and visualize in 2D space.
 - **Feature Selection**: Select top features based on F-values and p-values.
 
-- This was designed to bring in the hello world of data, the iris data set.  For out-of-the-box use, use iris.csv
+- **This was designed to bring in the hello world of data, the iris data set.  For out-of-the-box use, use iris.csv**
 
 ### Causality Analysis
 
@@ -71,7 +71,7 @@ This project is an interactive web application built using Streamlit, designed f
 - **Estimation**: Estimate causal effects and assess their significance.
 - **Run Refutation Tests**: Perform refutation tests to test the reliability of causal estimates.
 
-- Works out of the box if you bring in df_selcted1.csv and bring in causal_graph_complete.dot in the causal graph section.  Target price as the outcome and accommodates as the treatment
+-**Works out of the box if you bring in df_selcted1.csv and bring in causal_graph_complete.dot in the causal graph section.  Target price as the outcome and accommodates as the treatment**
 
 ### Save your model
 - **Model Saving**:  After all your hard work of feature engineering exploring the data and the models you can save your current csv file.

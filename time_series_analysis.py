@@ -129,13 +129,18 @@ def time_series_model_diagnostics(y_column, date_column):
     plot_acf(residuals, alpha=0.05)
     st.pyplot()
 
-    # Make a Ljung-Box test
+    # Ljung-Box test
     st.subheader("Ljung-Box Test")
-    lb, p_value = sm.stats.acorr_ljungbox(residuals, lags=10)
-    st.write("Ljung-Box test statistic:", lb)
-    st.write("P-value:", p_value)
+    lb_stat, lb_pvalue = sm.stats.acorr_ljungbox(residuals, lags=10, return_df=False)
     
+    # Display the results in a table format
+    df_ljungbox = pd.DataFrame({
+        "Lag": range(1, len(lb_stat) + 1),
+        "Test Statistic": lb_stat,
+        "P-value": lb_pvalue
+    })
 
+    st.table(df_ljungbox)
 
     # Durbin-Watson test
     st.subheader("Durbin-Watson Test")
@@ -148,6 +153,7 @@ def time_series_model_diagnostics(y_column, date_column):
     st.write(f"Log-Likelihood: {results.llf}")
     st.write(f"AIC: {results.aic}")
     st.write(f"BIC: {results.bic}")
+    
 
 
 
@@ -544,5 +550,6 @@ def create_time_series_features(data, y_column):
         st.markdown(href, unsafe_allow_html=True)
 
     return data
+
 
 

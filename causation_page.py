@@ -112,8 +112,9 @@ def display_relationships_definition():
 
     # Generate and display the causal graph
     if st.button("Generate Causal Graph"):
+        relationships = st.session_state.get("relationships", [])
         dot_representation = "digraph {\n"
-        for relation in st.session_state.relationships:
+        for relation in relationships:
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
         dot_representation += "}"
 
@@ -126,7 +127,6 @@ def display_relationships_definition():
 
         # Provide the download link for the DOT file
         st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
-
 
 
 

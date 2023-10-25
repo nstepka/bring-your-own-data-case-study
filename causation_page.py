@@ -37,6 +37,9 @@ import os
 from dowhy import CausalModel
 import re
 import graphviz
+import pygraphviz as pgv
+from PIL import Image
+import io
 
 
 
@@ -70,14 +73,19 @@ def display_relationships_definition():
     
     if uploaded_file:
         dot_content = uploaded_file.read().decode()
-        try:
-            uploaded_graph = graphviz.Source(dot_content)
-            st.graphviz_chart(uploaded_graph.source)
-            st.session_state.dot_representation = dot_content
-            st.session_state.relationships = parse_dot_content(dot_content)
-            st.success("DOT file uploaded successfully!")
-        except Exception as e:
-            st.error(f"Error processing DOT file: {e}")
+        st.session_state.dot_representation = dot_content
+        st.success("DOT file uploaded successfully!")
+
+        # Use pygraphviz to convert .dot content to an image
+        A = pgv.AGraph(string=dot_content)
+        A.layout(prog="dot")  # Layout with dot to generate a visualization
+        output = io.BytesIO()
+        A.draw(output, prog="dot", format="png")
+        output.seek(0)
+        st.image(output, caption="Uploaded Causal Graph", use_column_width=True)
+        
+        # Parse the uploaded DOT content to get relationships
+        st.session_state.relationships = parse_dot_content(dot_content)
 
 
     columns = list(st.session_state.data.columns)
@@ -281,4 +289,3 @@ def causality_page():
         display_causal_model_creation()
     elif task == "Run Refutation Tests":
         display_refutation_tests()
-

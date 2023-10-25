@@ -37,9 +37,6 @@ import os
 from dowhy import CausalModel
 import re
 import graphviz
-import pygraphviz as pgv
-from PIL import Image
-import io
 
 
 
@@ -73,15 +70,13 @@ def display_relationships_definition():
     
     if uploaded_file:
         dot_content = uploaded_file.read().decode()
-        try:
-            uploaded_graph = graphviz.Source(dot_content)
-            st.graphviz_chart(uploaded_graph.source)
-            st.session_state.dot_representation = dot_content
-            st.session_state.relationships = parse_dot_content(dot_content)
-            st.success("DOT file uploaded successfully!")
-        except Exception as e:
-            st.error(f"Error processing DOT file: {e}")
-
+        st.session_state.dot_representation = dot_content
+        st.success("DOT file uploaded successfully!")
+        uploaded_graph = graphviz.Source(dot_content)
+        st.graphviz_chart(uploaded_graph.source)
+        
+        # Parse the uploaded DOT content to get relationships
+        st.session_state.relationships = parse_dot_content(dot_content)
 
     columns = list(st.session_state.data.columns)
 
@@ -117,23 +112,20 @@ def display_relationships_definition():
 
     # Generate and display the causal graph
     if st.button("Generate Causal Graph"):
-        if "relationships" not in st.session_state or not st.session_state.relationships:
-            st.warning("No relationships defined. Please add relationships first.")
-            return
         dot_representation = "digraph {\n"
         for relation in st.session_state.relationships:
             dot_representation += f'    "{relation[0]}" -> "{relation[1]}";\n'
         dot_representation += "}"
 
+        # Explicitly set it in the session state
         st.session_state.dot_representation = dot_representation
-        try:
-            graph = graphviz.Source(dot_representation)
-            st.graphviz_chart(graph.source)
-            st.session_state.generated_graph = True  # Mark that the graph has been generated
-            st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
-        except Exception as e:
-            st.error(f"Error generating graph: {e}")
 
+        graph = graphviz.Source(dot_representation)
+        st.graphviz_chart(graph.source)
+        st.session_state.generated_graph = True  # Mark that the graph has been generated
+
+        # Provide the download link for the DOT file
+        st.markdown(generate_dot_download_link(dot_representation), unsafe_allow_html=True)
 
 
 
@@ -164,35 +156,32 @@ def display_causal_model_creation():
     """)
 
     if st.button("Create and Estimate Causal Model"):
-        try:
-            # Define Causal Model
-            model = CausalModel(
-                data=st.session_state.data,
-                treatment=treatment,
-                outcome=outcome,
-                graph=dot_representation
-            )
-            
-            # Identification
-            identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
-            st.session_state.identified_estimand = identified_estimand
-            st.write("Identified estimand:", identified_estimand)
+        # Define Causal Model
+        model = CausalModel(
+            data=st.session_state.data,
+            treatment=treatment,
+            outcome=outcome,
+            graph=st.session_state.get("dot_representation", "")
+        )
+        
+        
+        # Identification
+        identified_estimand = model.identify_effect(proceed_when_unidentifiable=True)
+        st.session_state.identified_estimand = identified_estimand
+        st.write("Identified estimand:", identified_estimand)
 
-            # Estimation
-            estimate = model.estimate_effect(identified_estimand,
-                                             method_name="backdoor.linear_regression",
-                                             control_value=0,
-                                             treatment_value=1,
-                                             confidence_intervals=True,
-                                             test_significance=True)
-            st.write("Causal Estimate:", estimate.value)
-            
-            st.session_state.causal_model = model
-            st.session_state.estimate = estimate
-            st.success("Causal model created and estimated successfully!")
-        except Exception as e:
-            st.error(f"Error creating causal model: {e}")
-
+        # Estimation
+        estimate = model.estimate_effect(identified_estimand,
+                                         method_name="backdoor.linear_regression",
+                                         control_value=0,
+                                         treatment_value=1,
+                                         confidence_intervals=True,
+                                         test_significance=True)
+        st.write("Causal Estimate:", estimate.value)
+        
+        st.session_state.causal_model = model
+        st.session_state.estimate = estimate
+        st.success("Causal model created and estimated successfully!")
 
 
 
@@ -284,3 +273,5 @@ def causality_page():
         display_causal_model_creation()
     elif task == "Run Refutation Tests":
         display_refutation_tests()
+
+
